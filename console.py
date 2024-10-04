@@ -1,8 +1,10 @@
 from coder import coder
+from save_to_file import save
 from is_valid_input import is_valid_input
 
 
 def main():
+    text = ""
     while True:
         prompt = input("1 - Encode text, 2 - Decode text\n"
                        "Your choice: ")
@@ -17,12 +19,15 @@ def main():
                 continue
             match prompt:
                 case "1":
-                    encoded_text = coder(input_text, input_key)
-                    print("Encoded text: " + encoded_text)
+                    text = coder(input_text, input_key)
+                    print("Encoded text: " + text)
                 case "2":
-                    decoded_text = coder(input_text, input_key, True)
-                    print("Decoded text: " + decoded_text)
+                    text = coder(input_text, input_key, True)
+                    print("Decoded text: " + text)
                 case "3":
                     break
+            save_input = input("Would you like to save the input? (y/n): ").upper()
+            if save_input in ["Y", "YES"]:
+                save(text)
         else:
             break
